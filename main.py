@@ -41,5 +41,4 @@ app.include_router(users.router)
 app.include_router(google_sso.router)
 
 if __name__ == '__main__':
-    os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
     uvicorn.run(app, host="0.0.0.0", port=9999)

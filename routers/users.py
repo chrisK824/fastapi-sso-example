@@ -39,7 +39,7 @@ def get_users(request: Request, user : User = Depends(get_current_user), db: Ses
     """
     try:
         users = db_crud.get_users(db)
-        return templates.TemplateResponse("users.html", {"request": request, "users": users})
+        return templates.TemplateResponse("users.html", {"request": request, "logged_as": user.email, "users": users})
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")

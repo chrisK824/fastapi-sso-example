@@ -1,15 +1,26 @@
 from fastapi import APIRouter, Depends, HTTPException
 from database_crud import users_db_crud as db_crud
-from schemas import UserSignUp
+from schemas import UserSignUp, User
 from sqlalchemy.orm import Session
 from database import get_db
 from fastapi_sso.sso.google import GoogleSSO
 from starlette.requests import Request
+from dotenv import load_dotenv
+from pathlib import Path
+import os
 
+directory_path = Path(__file__).parent
+env_file_path = directory_path.parent / '.env'
+
+load_dotenv()
+GOOGLE_CLIENT_ID =  os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET =  os.getenv("GOOGLE_CLIENT_SECRET")
+
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 google_sso = GoogleSSO(
-    "431321506734-mi9nlucicks7dbat0a70fs94bblfls42.apps.googleusercontent.com",
-    "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", 
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET, 
     "http://localhost:9999/v1/google/callback",
     allow_insecure_http=True
 )
@@ -22,7 +33,7 @@ async def google_login():
     return await google_sso.get_login_redirect(params={"prompt": "consent", "access_type": "offline"})
 
 
-@router.get("/callback", tags=['Google SSO'])
+@router.get("/callback", response_model=User, tags=['Google SSO'])
 async def google_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from Google and return user info"""
 
