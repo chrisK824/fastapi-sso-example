@@ -10,11 +10,20 @@ class DuplicateError(Exception):
 
 
 def add_user(db: Session, user: schemas.UserSignUp, provider: str = None):
+    if not provider and not user.password:
+        raise ValueError("A password should be provided for non SSO registers")
+    elif provider and user.password:
+        raise ValueError("A password should not be provided for SSO registers")
+    
+    if user.password:
+        password = get_password_hash(user.password)
+    else:
+        password = None
+
     user = User(
         email=user.email,
-        password=get_password_hash(user.password),
-        name=user.name,
-        surname=user.surname,
+        password=password,
+        fullname=user.fullname,
         provider=provider
     )
     try:

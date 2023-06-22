@@ -6,14 +6,12 @@ from typing import Optional
 class UserSignUp(BaseModel):
     email: EmailStr
     password: Optional[str]
-    name: str
-    surname: Optional[str] = None
+    fullname: Optional[str] = None
 
 
 class User(BaseModel):
     email: EmailStr
-    name: str
-    surname: Optional[str]
+    fullname: Optional[str]
     provider: Optional[str]
     register_date: Optional[datetime]
 

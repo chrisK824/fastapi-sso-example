@@ -6,11 +6,9 @@ from database import Base
 class User(Base):
     __tablename__ = "users"
     email = Column(String, primary_key=True, index=True)
-    password = Column(String)
+    password = Column(String, nullable=True)
     provider = Column(String, default="local", nullable=True)
-    name = Column(String, nullable=True)
-    surname = Column(String, nullable=True)
-    role = Column(String)
+    fullname = Column(String, nullable=True)
     register_date = Column(DateTime, default=func.now())
 
     @property
