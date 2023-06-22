@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Users information</title>
+</head>
+<body>
+
+<table style="text-align: center; padding: auto;">
+    <tr>
+        <td>Email</td>
+        <td>Name</td>
+        <td>Surname</td>
+        <td>Provider</td>
+    </tr>
+    {% for user in users %}
+    <tr>
+       <td>{{user.email}}</td>
+       <td>{{user.name}}</td>
+       <td>{{user.surname}}</td>
+       <td>{{user.provider}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

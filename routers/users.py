@@ -1,4 +1,4 @@
-from fastapi import Depends, APIRouter, HTTPException
+from fastapi import Depends, APIRouter, HTTPException, Request
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import List
@@ -6,10 +6,14 @@ from authentication import create_access_token, authenticate_user
 from database import get_db
 from database_crud import users_db_crud as db_crud
 from schemas import User, UserSignUp, Token
+from fastapi.templating import Jinja2Templates
+from pathlib import Path
 
-
-
+parent_directory = Path(__file__).parent
+templates_path = parent_directory.parent / "templates"
+print(templates_path)
 router = APIRouter(prefix="/v1")
+templates = Jinja2Templates(directory=templates_path)
 
 
 @router.post("/sign_up", response_model=User, summary="Register a user", tags=["Users"])
@@ -28,13 +32,13 @@ def create_user(user_signup: UserSignUp, db: Session = Depends(get_db)):
 
 
 @router.get("/users", response_model=List[User], summary="Get all users", tags=["Users"])
-def get_users(db: Session = Depends(get_db)):
+def get_users(request: Request, db: Session = Depends(get_db)):
     """
     Returns all users.
     """
     try:
         users = db_crud.get_users(db)
-        return users
+        return templates.TemplateResponse("users.html", {"request": request, "users": users})
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
