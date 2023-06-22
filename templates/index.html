@@ -17,8 +17,31 @@
     </p>
     <p style="text-align:right;">{{user.email}}<i class="fa-regular fa-user"></i></p>
     {% else %}
+        <p style="text-align: center;">Sign in methods:</p>
         <form method="get" action="/v1/google/login" style="text-align: center;">
-            <button class="login-with-google-btn" type="submit">Sign in with Google</button>
+            <button class="login-btn" type="submit">
+                <i class="fa-brands fa-google"></i>
+            </button>
+         </form>
+         <form method="get" action="/v1/github/login" style="text-align: center;" >
+            <button class="login-btn" type="submit">
+                <i class="fa-brands fa-github"> </i>
+            </button>
+         </form>
+         <form method="get" action="/v1/spotify/login" style="text-align: center;" >
+            <button class="login-btn" type="submit">
+                <i class="fa-brands fa-spotify"></i>
+            </button>
+         </form>
+         <form method="get" action="/v1/facebook/login" style="text-align: center;" >
+            <button class="login-btn" type="submit">
+                <i class="fa-brands fa-facebook"></i>
+            </button>
+         </form>
+         <form method="get" action="/v1/microsoft/login" style="text-align: center;" >
+            <button class="login-btn" type="submit">
+                <i class="fa-brands fa-microsoft"></i>
+            </button>
          </form>
     {% endif %}
 
