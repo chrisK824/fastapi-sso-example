@@ -1,21 +1,17 @@
-from fastapi import Depends, APIRouter, HTTPException, Request
+from fastapi import Depends, APIRouter, HTTPException
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
-from typing import List
-from authentication import create_access_token, authenticate_user, get_current_user
+from authentication import create_access_token, authenticate_user
 from database import get_db
 from database_crud import users_db_crud as db_crud
 from schemas import User, UserSignUp, Token
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 
-parent_directory = Path(__file__).parent
-templates_path = parent_directory.parent / "templates"
 router = APIRouter(prefix="/v1")
-templates = Jinja2Templates(directory=templates_path)
 
 
-@router.post("/sign_up", response_model=User, summary="Register a user", tags=["Users"])
+@router.post("/sign_up", response_model=User, summary="Register a user", tags=["Auth"])
 def create_user(user_signup: UserSignUp, db: Session = Depends(get_db)):
     """
     Registers a user.
@@ -32,20 +28,7 @@ def create_user(user_signup: UserSignUp, db: Session = Depends(get_db)):
             status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
 
 
-@router.get("/users", response_model=List[User], summary="Get all users", tags=["Users"])
-def get_users(request: Request, user : User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """
-    Returns all users.
-    """
-    try:
-        users = db_crud.get_users(db)
-        return templates.TemplateResponse("users.html", {"request": request, "logged_as": user.email, "users": users})
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
-
-
-@router.post("/token", response_model=Token, summary="Authorize as a user", tags=["Users"])
+@router.post("/token", response_model=Token, summary="Authorize as a user", tags=["Auth"])
 def authorize(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     """
     Logs in a user.

@@ -59,6 +59,8 @@ def authenticate_user(db: Session, user_email: str, password: str):
 
 
 def get_current_user(db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
+    if not token:
+        return None
     try:
         user_email = get_token_payload(token)
     except BearAuthException:

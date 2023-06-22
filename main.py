@@ -1,12 +1,25 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Depends, HTTPException
 from contextlib import asynccontextmanager
 from db_models import Base
 from database import engine
-from routers import users, google_sso
+from database_crud import users_db_crud as db_crud
+from sqlalchemy.orm import Session
+from routers import auth, google_sso
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
-import os 
+from schemas import User
+from authentication import get_current_user
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+from database import get_db
+
+parent_directory = Path(__file__).parent
+templates_path = parent_directory / "templates"
+templates = Jinja2Templates(directory=templates_path)
+
 
 
 description = """
@@ -37,8 +50,27 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-app.include_router(users.router)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+app.include_router(auth.router)
 app.include_router(google_sso.router)
+
+@app.get("/", response_class=HTMLResponse, summary="Home page")
+def home_page(request: Request, db: Session = Depends(get_db), access_token: str = None):
+    """
+    Returns all users.
+    """
+    try:
+        user = get_current_user(db=db, token=access_token)
+        if user is not None:
+            users_stats = db_crud.get_users_stats(db)
+            print(users_stats)
+        else:
+            users_stats = []
+        return templates.TemplateResponse("index.html", {"request": request, "user": user, "users_stats": users_stats})
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
+
 
 if __name__ == '__main__':
     uvicorn.run(app, host="0.0.0.0", port=9999)

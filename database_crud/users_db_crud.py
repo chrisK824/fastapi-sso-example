@@ -3,6 +3,7 @@ from db_models import User
 import schemas as schemas
 from sqlalchemy.exc import IntegrityError
 from authentication import get_password_hash
+from sqlalchemy import func
 
 
 class DuplicateError(Exception):
@@ -36,8 +37,24 @@ def add_user(db: Session, user: schemas.UserSignUp, provider: str = None):
     return user
 
 
-def get_users(db: Session):
-    users = list(db.query(User).all())
-    return users
+def get_user(db: Session, user_email: str):
+    user = db.query(User).filter(User.email == user_email).first()
+    return user
+
+
+def get_users_stats(db: Session):
+    records = db.query(User).with_entities(
+        User.provider.label("provider"), 
+        func.count(User.provider).label("count")
+        ).group_by(User.provider).all()
+    
+    users_stats = [
+        schemas.UserStat(
+            provider=record[0],
+            count=record[1]
+        )
+        for record in records
+    ]
+    return users_stats
 
 
