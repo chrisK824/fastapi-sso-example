@@ -42,10 +42,12 @@ async def github_callback(request: Request, db: Session = Depends(get_db)):
 
     try:
         user = await github_sso.verify_and_process(request)
-        user_stored = db_crud.get_user(db, user.display_name, user.provider)
+        print(user)
+        username = user.email if user.email else user.display_name
+        user_stored = db_crud.get_user(db, username, user.provider)
         if not user_stored:
             user_to_add = UserSignUp(
-                username=user.display_name,
+                username=username,
                 fullname=user.display_name
             )
             user_stored = db_crud.add_user(db, user_to_add, provider=user.provider)
