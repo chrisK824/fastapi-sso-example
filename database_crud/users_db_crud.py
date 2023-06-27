@@ -37,8 +37,8 @@ def add_user(db: Session, user: schemas.UserSignUp, provider: str = None):
     return user
 
 
-def get_user(db: Session, user_email: str):
-    user = db.query(User).filter(User.email == user_email).first()
+def get_user(db: Session, user_email: str, provider: str):
+    user = db.query(User).filter(User.email == user_email).filter(User.provider == provider).first()
     return user
 
 

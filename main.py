@@ -5,7 +5,7 @@ from db_models import Base
 from database import engine
 from database_crud import users_db_crud as db_crud
 from sqlalchemy.orm import Session
-from routers import auth, google_sso
+from routers import auth, google_sso, spotify_sso
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from schemas import User
@@ -19,8 +19,6 @@ from database import get_db
 parent_directory = Path(__file__).parent
 templates_path = parent_directory / "templates"
 templates = Jinja2Templates(directory=templates_path)
-
-
 
 description = """
 Example API to demonstrate SSO login in fastAPI
@@ -53,6 +51,7 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(auth.router)
 app.include_router(google_sso.router)
+app.include_router(spotify_sso.router)
 
 @app.get("/", response_class=HTMLResponse, summary="Home page")
 def home_page(request: Request, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
