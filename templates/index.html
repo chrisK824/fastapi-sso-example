@@ -8,13 +8,13 @@
 </head>
 <body>
     <div class="row">
-        <div class="outter col-lg-6">
+        <div class="outter">
     {% if user %}
-        <form method="post" action="/v1/logout">
+        <form class="col-lg-2 logout" method="post" action="/v1/logout">
             <button  class="fa-solid fa-right-from-bracket" type="submit">
             </button>
          </form>
-    <p style="text-align:right;float: right;"><i class="fa-regular fa-user"></i>  {{user.email}}</p>
+    <p class="col-lg-2"><i class="fa-regular fa-user"></i>  {{user.email}}</p>
     {% else %}
         <form action="v1/login" method="post">
               <label for="username"><b>Username</b></label>

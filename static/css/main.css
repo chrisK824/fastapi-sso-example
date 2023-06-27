@@ -39,3 +39,9 @@ button:hover {
 .login-btn {
   border-radius: 3px;
 }
+
+.logout {
+  float:right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
