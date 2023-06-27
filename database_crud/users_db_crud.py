@@ -22,7 +22,7 @@ def add_user(db: Session, user: schemas.UserSignUp, provider: str = None):
         password = None
 
     user = User(
-        email=user.email,
+        username=user.username,
         password=password,
         fullname=user.fullname,
         provider=provider
@@ -33,12 +33,12 @@ def add_user(db: Session, user: schemas.UserSignUp, provider: str = None):
     except IntegrityError:
         db.rollback()
         raise DuplicateError(
-            f"Email {user.email} is already attached to a registered user.")
+            f"Username {user.username} is already attached to a registered user for the provider '{provider}'.")
     return user
 
 
-def get_user(db: Session, user_email: str, provider: str):
-    user = db.query(User).filter(User.email == user_email).filter(User.provider == provider).first()
+def get_user(db: Session, username: str, provider: str):
+    user = db.query(User).filter(User.username == username).filter(User.provider == provider).first()
     return user
 
 

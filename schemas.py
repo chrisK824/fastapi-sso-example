@@ -4,13 +4,13 @@ from typing import Optional
 
 
 class UserSignUp(BaseModel):
-    email: EmailStr
+    username: str
     password: Optional[str]
     fullname: Optional[str] = None
 
 
 class User(BaseModel):
-    email: EmailStr
+    username: str
     fullname: Optional[str]
     provider: Optional[str]
     register_date: Optional[datetime]

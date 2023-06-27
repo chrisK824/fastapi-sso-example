@@ -32,12 +32,12 @@ def login(response: RedirectResponse, username: str = Form(...), password: str =
     """
     Logs in a user.
     """
-    user = authenticate_user(db=db, user_email=username, password=password)
+    user = authenticate_user(db=db, username=username, password=password, provider='local')
     if not user:
         raise HTTPException(
-            status_code=401, detail="Invalid user email or password.")
+            status_code=401, detail="Invalid username or password.")
     try:
-        access_token = create_access_token(data=user.email)
+        access_token = create_access_token(username=user.username, provider='local')
         response = RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
         response.set_cookie(SESSION_COOKIE_NAME, access_token)
         return response
