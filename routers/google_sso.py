@@ -6,11 +6,11 @@ from sqlalchemy.orm import Session
 from database import get_db
 from fastapi_sso.sso.google import GoogleSSO
 from starlette.requests import Request
-from authentication import create_access_token
+from authentication import create_access_token, SESSION_COOKIE_NAME
 from dotenv import load_dotenv
 from pathlib import Path
 import os
-from starlette.datastructures import URL
+
 
 directory_path = Path(__file__).parent
 env_file_path = directory_path.parent / '.env'
@@ -36,7 +36,7 @@ async def google_login():
     return await google_sso.get_login_redirect(params={"prompt": "consent", "access_type": "offline"})
 
 
-@router.get("/callback", response_model=User, tags=['Google SSO'])
+@router.get("/callback", tags=['Google SSO'])
 async def google_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from Google and return user info"""
 
@@ -50,10 +50,9 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
             )
             user_stored = db_crud.add_user(db, user_to_add, provider=user.provider)
         access_token = create_access_token(data=user_stored.email)
-        url = f"/?access_token={access_token}"
-        return RedirectResponse(
-            url, 
-            status_code=status.HTTP_303_SEE_OTHER)
+        response = RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
+        response.set_cookie(SESSION_COOKIE_NAME, access_token)
+        return response
     except db_crud.DuplicateError as e:
         raise HTTPException(status_code=403, detail=f"{e}")
     except ValueError as e:

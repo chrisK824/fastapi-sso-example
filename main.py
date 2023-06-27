@@ -55,15 +55,13 @@ app.include_router(auth.router)
 app.include_router(google_sso.router)
 
 @app.get("/", response_class=HTMLResponse, summary="Home page")
-def home_page(request: Request, db: Session = Depends(get_db), access_token: str = None):
+def home_page(request: Request, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     """
     Returns all users.
     """
     try:
-        user = get_current_user(db=db, token=access_token)
         if user is not None:
             users_stats = db_crud.get_users_stats(db)
-            print(users_stats)
         else:
             users_stats = []
         return templates.TemplateResponse("index.html", {"request": request, "user": user, "users_stats": users_stats})

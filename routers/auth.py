@@ -1,12 +1,11 @@
-from fastapi import Depends, APIRouter, HTTPException
+from fastapi import Depends, APIRouter, HTTPException, Form, status
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
-from fastapi.security import OAuth2PasswordRequestForm
-from authentication import create_access_token, authenticate_user
+from authentication import create_access_token, authenticate_user, SESSION_COOKIE_NAME
 from database import get_db
 from database_crud import users_db_crud as db_crud
-from schemas import User, UserSignUp, Token
-from fastapi.templating import Jinja2Templates
-from pathlib import Path
+from schemas import User, UserSignUp
+
 
 router = APIRouter(prefix="/v1")
 
@@ -28,21 +27,34 @@ def create_user(user_signup: UserSignUp, db: Session = Depends(get_db)):
             status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
 
 
-@router.post("/token", response_model=Token, summary="Authorize as a user", tags=["Auth"])
-def authorize(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+@router.post("/login", summary="Login as a user", tags=["Auth"])
+def login(response: RedirectResponse, username: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
     """
     Logs in a user.
     """
-    user = authenticate_user(db=db, user_email=form_data.username, password=form_data.password)
+    user = authenticate_user(db=db, user_email=username, password=password)
     if not user:
         raise HTTPException(
             status_code=401, detail="Invalid user email or password.")
     try:
         access_token = create_access_token(data=user.email)
-        return {
-            "access_token": access_token,
-            "token_type": "bearer"
-        }
+        response = RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
+        response.set_cookie(SESSION_COOKIE_NAME, access_token)
+        return response
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
+
+
+@router.post("/logout", summary="Logout a user", tags=["Auth"])
+def logout():
+    """
+    Logout a user.
+    """
+    try:
+        response = RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
+        response.delete_cookie(SESSION_COOKIE_NAME)
+        return response
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
