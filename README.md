@@ -1,2 +1,2 @@
 # fastapi-sso-example
-FastAPI SSO example with various providers
+FastAPI Single Sign On example with various providers and minimal home page that presents counters for users from each provider 
