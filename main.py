@@ -56,6 +56,7 @@ app.include_router(github_sso.router)
 app.include_router(facebook_sso.router)
 app.include_router(microsoft_sso.router)
 
+
 @app.get("/", response_class=HTMLResponse, summary="Home page")
 def home_page(request: Request, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     """

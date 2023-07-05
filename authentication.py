@@ -83,9 +83,5 @@ def get_current_user(db: Session = Depends(get_db), session_token: str = Depends
         )
     user = db.query(User).filter(User.username == username).filter(User.provider == provider).first()
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Unauthorized, could not validate credentials.",
-            headers={"WWW-Authenticate": "Bearer"}
-        )
+        return None
     return user
