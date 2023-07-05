@@ -42,7 +42,6 @@ async def github_callback(request: Request, db: Session = Depends(get_db)):
 
     try:
         user = await github_sso.verify_and_process(request)
-        print(user)
         username = user.email if user.email else user.display_name
         user_stored = db_crud.get_user(db, username, user.provider)
         if not user_stored:
