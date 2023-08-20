@@ -14,11 +14,9 @@ directory_path = Path(__file__).parent
 env_file_path = directory_path / '.env'
 
 load_dotenv()
-SECRET_KEY = os.getenv("SECRET_KEY")
-SESSION_COOKIE_NAME = os.getenv("SESSION_COOKIE_NAME")
+SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key")
+SESSION_COOKIE_NAME = os.getenv("SESSION_COOKIE_NAME", "default_session_cookie_name")
 
-if SESSION_COOKIE_NAME is None:
-    SESSION_COOKIE_NAME = "default_session_cookie_name"
 
 COOKIE = APIKeyCookie(name=SESSION_COOKIE_NAME, auto_error=False)
 
