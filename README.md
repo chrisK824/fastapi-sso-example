@@ -9,10 +9,14 @@ FastAPI Single Sign On example with various providers and minimal home page that
 
 ## Setup and Configuration
 
-* Create a `.env` file in the project root directory.
-* Add the following environment variable key-value pairs to the `.env` file:<br>
-    * `SECRET_KEY=your_secret_key_value`<br>
-    * `SESSION_COOKIE_NAME=your_cookie_name_value`
+* Create a `.env` file in the project root directory with the keys just like shown in `.env.example`
+* Fill the values for each environment variable
+* For creating client IDs and secrets for each provider you can follow these guides:
+- Google: https://medium.com/itnext/fastapi-google-single-sign-on-sso-47454e2e2859
+- Facebook: https://medium.com/@christos.karvouniaris247/fastapi-facebook-single-sign-on-sso-b10865535029
+- GitHub: https://medium.com/@christos.karvouniaris247/fastapi-github-single-sign-on-sso-f6b942395649
+- Microsoft: https://medium.com/@christos.karvouniaris247/fastapi-microsoft-single-sign-on-sso-d0a0ab248c36
+- Spotify: https://medium.com/@christos.karvouniaris247/fastapi-spotify-single-sign-on-sso-4f461b95344c
 
 ## Use the project
 * While in activated virtual environment, run with: `python3.11 main.py`
