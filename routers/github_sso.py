@@ -33,7 +33,8 @@ router = APIRouter(prefix="/v1/github")
 
 @router.get("/login", tags=['Github SSO'])
 async def github_login():
-    return await github_sso.get_login_redirect()
+    with github_sso:
+        return await github_sso.get_login_redirect()
 
 
 @router.get("/callback", tags=['Github SSO'])
@@ -41,7 +42,8 @@ async def github_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from Github and return user info"""
 
     try:
-        user = await github_sso.verify_and_process(request)
+        with github_sso:
+            user = await github_sso.verify_and_process(request)
         username = user.email if user.email else user.display_name
         user_stored = db_crud.get_user(db, username, user.provider)
         if not user_stored:

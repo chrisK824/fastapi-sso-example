@@ -33,7 +33,8 @@ router = APIRouter(prefix="/v1/facebook")
 
 @router.get("/login", tags=['Facebook SSO'])
 async def facebook_login():
-    return await facebook_sso.get_login_redirect()
+    with facebook_sso:
+        return await facebook_sso.get_login_redirect()
 
 
 @router.get("/callback", tags=['Facebook SSO'])
@@ -41,7 +42,8 @@ async def facebook_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from Facebook and return user info"""
 
     try:
-        user = await facebook_sso.verify_and_process(request)
+        with facebook_sso:
+            user = await facebook_sso.verify_and_process(request)
         username = user.email
         user_stored = db_crud.get_user(db, username, user.provider)
         if not user_stored:
