@@ -33,7 +33,8 @@ router = APIRouter(prefix="/v1/google")
 
 @router.get("/login", tags=['Google SSO'])
 async def google_login():
-    return await google_sso.get_login_redirect(params={"prompt": "consent", "access_type": "offline"})
+    with google_sso:
+        return await google_sso.get_login_redirect(params={"prompt": "consent", "access_type": "offline"})
 
 
 @router.get("/callback", tags=['Google SSO'])
@@ -41,7 +42,8 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from Google and return user info"""
 
     try:
-        user = await google_sso.verify_and_process(request)
+        with google_sso:
+            user = await google_sso.verify_and_process(request)
         user_stored = db_crud.get_user(db, user.email, provider=user.provider)
         if not user_stored:
             user_to_add = UserSignUp(
