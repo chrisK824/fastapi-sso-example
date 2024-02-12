@@ -1,7 +1,7 @@
 fastapi==0.109.0
 pydantic==2.6.1
 uvicorn==0.27.0.post1
-sqlalchemy==2.0.25
+sqlalchemy==2.0.26
 passlib==1.7.4
 python-jose==3.3.0
 email-validator==2.1.0.post1
