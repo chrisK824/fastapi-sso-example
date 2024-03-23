@@ -1,11 +1,11 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 
 
 class UserSignUp(BaseModel):
     username: str
-    password: Optional[str]
+    password: Optional[str] = None
     fullname: Optional[str] = None
 
 

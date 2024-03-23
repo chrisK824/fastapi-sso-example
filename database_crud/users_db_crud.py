@@ -15,7 +15,7 @@ def add_user(db: Session, user: schemas.UserSignUp, provider: str = None):
         raise ValueError("A password should be provided for non SSO registers")
     elif provider and user.password:
         raise ValueError("A password should not be provided for SSO registers")
-    
+
     if user.password:
         password = get_password_hash(user.password)
     else:
@@ -33,21 +33,24 @@ def add_user(db: Session, user: schemas.UserSignUp, provider: str = None):
     except IntegrityError:
         db.rollback()
         raise DuplicateError(
-            f"Username {user.username} is already attached to a registered user for the provider '{provider}'.")
+            f"Username {user.username} is already attached to a "
+            "registered user for the provider '{provider}'."
+        )
     return user
 
 
 def get_user(db: Session, username: str, provider: str):
-    user = db.query(User).filter(User.username == username).filter(User.provider == provider).first()
+    user = db.query(User).filter(User.username == username).filter(
+        User.provider == provider).first()
     return user
 
 
 def get_users_stats(db: Session):
     records = db.query(User).with_entities(
-        User.provider.label("provider"), 
+        User.provider.label("provider"),
         func.count(User.provider).label("count")
-        ).group_by(User.provider).all()
-    
+    ).group_by(User.provider).all()
+
     users_stats = [
         schemas.UserStat(
             provider=record[0],
@@ -56,5 +59,3 @@ def get_users_stats(db: Session):
         for record in records
     ]
     return users_stats
-
-

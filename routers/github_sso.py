@@ -16,8 +16,8 @@ directory_path = Path(__file__).parent
 env_file_path = directory_path.parent / '.env'
 
 load_dotenv()
-GITHUB_CLIENT_ID =  os.getenv("GITHUB_CLIENT_ID")
-GITHUB_CLIENT_SECRET =  os.getenv("GITHUB_CLIENT_SECRET")
+GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID")
+GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
@@ -51,8 +51,15 @@ async def github_callback(request: Request, db: Session = Depends(get_db)):
                 username=username,
                 fullname=user.display_name
             )
-            user_stored = db_crud.add_user(db, user_to_add, provider=user.provider)
-        access_token = create_access_token(username=user_stored.username, provider=user.provider)
+            user_stored = db_crud.add_user(
+                db,
+                user_to_add,
+                provider=user.provider
+            )
+        access_token = create_access_token(
+            username=user_stored.username,
+            provider=user.provider
+        )
         response = RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
         response.set_cookie(SESSION_COOKIE_NAME, access_token)
         return response
@@ -62,4 +69,6 @@ async def github_callback(request: Request, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=f"{e}")
     except Exception as e:
         raise HTTPException(
-            status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
+            status_code=500,
+            detail=f"An unexpected error occurred. Report this message to support: {e}"
+        )

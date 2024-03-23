@@ -56,7 +56,7 @@ def get_token_payload(session_token: str):
             "username": username,
             "provider": provider
         }
-    except JWTError as e:
+    except JWTError:
         raise BearAuthException("Token could not be validated")
 
 
