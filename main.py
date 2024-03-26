@@ -12,6 +12,7 @@ from routers import (
     github_sso,
     gitlab_sso,
     facebook_sso,
+    xtwitter_sso,
     microsoft_sso
 )
 from starlette.middleware.cors import CORSMiddleware
@@ -63,6 +64,7 @@ app.include_router(spotify_sso.router)
 app.include_router(github_sso.router)
 app.include_router(gitlab_sso.router)
 app.include_router(facebook_sso.router)
+app.include_router(xtwitter_sso.router)
 app.include_router(microsoft_sso.router)
 
 
