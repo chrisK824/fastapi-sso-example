@@ -5,7 +5,15 @@ from db_models import Base
 from database import engine
 from database_crud import users_db_crud as db_crud
 from sqlalchemy.orm import Session
-from routers import auth, google_sso, spotify_sso, github_sso, facebook_sso, microsoft_sso
+from routers import (
+    auth, 
+    google_sso,
+    spotify_sso,
+    github_sso,
+    gitlab_sso,
+    facebook_sso,
+    microsoft_sso
+)
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from schemas import User
@@ -53,6 +61,7 @@ app.include_router(auth.router)
 app.include_router(google_sso.router)
 app.include_router(spotify_sso.router)
 app.include_router(github_sso.router)
+app.include_router(gitlab_sso.router)
 app.include_router(facebook_sso.router)
 app.include_router(microsoft_sso.router)
 
