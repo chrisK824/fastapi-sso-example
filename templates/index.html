@@ -12,70 +12,28 @@
 <body>
     <div class="row">
         <div class="outter">
-            {% if user %}
-            <form class="col-lg-2 logout" method="post" action="/v1/logout">
-                <button class="fa-solid fa-right-from-bracket" type="submit">
-                </button>
-            </form>
-            <p class="col-lg-2"><i class="fa-regular fa-user"></i> {{user.username}}</p>
-            {% else %}
-            <form action="v1/login" method="post">
-                <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required>
-
-                <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-
-                <button type="submit">Login</button>
-            </form>
-            <div class="sso col-lg-8">
-                <form class="col-lg-2" method="get" action="/v1/google/login" style="text-align: center;">
-                    <button class="login-btn" type="submit">
-                        <i class="fa-brands fa-google"></i>
-                    </button>
-                </form>
-                <form class="col-lg-2" method="get" action="/v1/github/login" style="text-align: center;">
-                    <button class="login-btn" type="submit">
-                        <i class="fa-brands fa-github"> </i>
-                    </button>
-                </form>
-                <form class="col-lg-2" method="get" action="/v1/spotify/login" style="text-align: center;">
-                    <button class="login-btn" type="submit">
-                        <i class="fa-brands fa-spotify"></i>
-                    </button>
-                </form>
-                <form class="col-lg-2" method="get" action="/v1/facebook/login" style="text-align: center;">
-                    <button class="login-btn" type="submit">
-                        <i class="fa-brands fa-facebook"></i>
-                    </button>
-                </form>
-                <form class="col-lg-2" method="get" action="/v1/microsoft/login" style="text-align: center;">
-                    <button class="login-btn" type="submit">
-                        <i class="fa-brands fa-microsoft"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if user %}
-        <table style="text-align:center;" class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Provider</th>
-                    <th scope="col">Users #</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for record in users_stats %}
-                <tr>
-                    <td>{{record.provider}}</td>
-                    <td>{{record.count}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
+        <form class="col-lg-2 logout" method="post" action="/v1/logout">
+            <button class="fa-solid fa-right-from-bracket" type="submit">
+            </button>
+        </form>
+        <p class="col-lg-2"><i class="fa-regular fa-user"></i> {{user.username}}</p>
+        
+    <table style="text-align:center;" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Provider</th>
+                <th scope="col">Users #</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in users_stats %}
+            <tr>
+                <td>{{record.provider}}</td>
+                <td>{{record.count}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     </div>
 </body>
 

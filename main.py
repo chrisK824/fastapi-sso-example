@@ -65,9 +65,10 @@ def home_page(request: Request, db: Session = Depends(get_db), user: User = Depe
     try:
         if user is not None:
             users_stats = db_crud.get_users_stats(db)
+            response = templates.TemplateResponse("index.html", {"request": request, "user": user, "users_stats": users_stats})
         else:
-            users_stats = []
-        return templates.TemplateResponse("index.html", {"request": request, "user": user, "users_stats": users_stats})
+            response = templates.TemplateResponse("login.html", {"request": request})
+        return response
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
