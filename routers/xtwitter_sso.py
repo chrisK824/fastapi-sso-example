@@ -8,12 +8,8 @@ from fastapi_sso.sso.twitter import TwitterSSO
 from starlette.requests import Request
 from authentication import create_access_token, SESSION_COOKIE_NAME
 from dotenv import load_dotenv
-from pathlib import Path
 import os
 
-
-directory_path = Path(__file__).parent
-env_file_path = directory_path.parent / '.env'
 
 load_dotenv()
 XTWITTER_CLIENT_ID = os.getenv("XTWITTER_CLIENT_ID")

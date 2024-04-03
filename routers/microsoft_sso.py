@@ -8,17 +8,13 @@ from fastapi_sso.sso.microsoft import MicrosoftSSO
 from starlette.requests import Request
 from authentication import create_access_token, SESSION_COOKIE_NAME
 from dotenv import load_dotenv
-from pathlib import Path
 import os
 
 
-directory_path = Path(__file__).parent
-env_file_path = directory_path.parent / '.env'
-
 load_dotenv()
-MICROSOFT_CLIENT_ID =  os.getenv("MICROSOFT_CLIENT_ID")
-MICROSOFT_CLIENT_SECRET =  os.getenv("MICROSOFT_CLIENT_SECRET")
-TENANT =  os.getenv("TENANT")
+MICROSOFT_CLIENT_ID = os.getenv("MICROSOFT_CLIENT_ID")
+MICROSOFT_CLIENT_SECRET = os.getenv("MICROSOFT_CLIENT_SECRET")
+TENANT = os.getenv("TENANT")
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 

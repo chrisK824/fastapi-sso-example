@@ -8,12 +8,8 @@ from fastapi_sso.sso.linkedin import LinkedInSSO
 from starlette.requests import Request
 from authentication import create_access_token, SESSION_COOKIE_NAME
 from dotenv import load_dotenv
-from pathlib import Path
 import os
 
-
-directory_path = Path(__file__).parent
-env_file_path = directory_path.parent / '.env'
 
 load_dotenv()
 LINKEDIN_CLIENT_ID = os.getenv("LINKEDIN_CLIENT_ID")
