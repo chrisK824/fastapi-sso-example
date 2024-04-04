@@ -20,8 +20,7 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 google_sso = GoogleSSO(
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
-    f"{os.getenv('HOST')}/v1/google/callback",
-    allow_insecure_http=True
+    f"{os.getenv('HOST')}/v1/google/callback"
 )
 
 router = APIRouter(prefix="/v1/google")

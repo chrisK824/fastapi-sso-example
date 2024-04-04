@@ -19,8 +19,7 @@ MICROSOFT_CLIENT_SECRET = os.getenv("MICROSOFT_CLIENT_SECRET")
 microsoft_sso = MicrosoftSSO(
     MICROSOFT_CLIENT_ID,
     MICROSOFT_CLIENT_SECRET,
-    f"{os.getenv('HOST')}/v1/microsoft/callback",
-    allow_insecure_http=True
+    f"{os.getenv('HOST')}/v1/microsoft/callback"
 )
 
 router = APIRouter(prefix="/v1/microsoft")

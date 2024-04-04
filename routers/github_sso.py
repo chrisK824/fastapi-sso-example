@@ -19,8 +19,7 @@ GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")
 github_sso = GithubSSO(
     GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET,
-    f"{os.getenv('HOST')}/v1/github/callback",
-    allow_insecure_http=True
+    f"{os.getenv('HOST')}/v1/github/callback"
 )
 
 router = APIRouter(prefix="/v1/github")

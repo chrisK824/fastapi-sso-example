@@ -19,8 +19,7 @@ LINKEDIN_CLIENT_SECRET = os.getenv("LINKEDIN_CLIENT_SECRET")
 linkedin_sso = LinkedInSSO(
     LINKEDIN_CLIENT_ID,
     LINKEDIN_CLIENT_SECRET,
-    f"{os.getenv('HOST')}/v1/linkedin/callback",
-    allow_insecure_http=True
+    f"{os.getenv('HOST')}/v1/linkedin/callback"
 )
 
 router = APIRouter(prefix="/v1/linkedin")

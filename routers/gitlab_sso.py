@@ -19,8 +19,7 @@ GITLAB_CLIENT_SECRET = os.getenv("GITLAB_CLIENT_SECRET")
 gitlab_sso = GitlabSSO(
     GITLAB_CLIENT_ID,
     GITLAB_CLIENT_SECRET,
-    f"{os.getenv('HOST')}/v1/gitlab/callback",
-    allow_insecure_http=True
+    f"{os.getenv('HOST')}/v1/gitlab/callback"
 )
 
 router = APIRouter(prefix="/v1/gitlab")

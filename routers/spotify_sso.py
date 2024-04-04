@@ -19,8 +19,7 @@ SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 spotify_sso = SpotifySSO(
     SPOTIFY_CLIENT_ID,
     SPOTIFY_CLIENT_SECRET,
-    f"{os.getenv('HOST')}/v1/spotify/callback",
-    allow_insecure_http=True
+    f"{os.getenv('HOST')}/v1/spotify/callback"
 )
 
 router = APIRouter(prefix="/v1/spotify")

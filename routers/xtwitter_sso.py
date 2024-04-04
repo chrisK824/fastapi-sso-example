@@ -19,8 +19,7 @@ XTWITTER_CLIENT_SECRET = os.getenv("XTWITTER_CLIENT_SECRET")
 xtwitter_sso = TwitterSSO(
     XTWITTER_CLIENT_ID,
     XTWITTER_CLIENT_SECRET,
-    f"{os.getenv('HOST')}/v1/xtwitter/callback",
-    allow_insecure_http=True
+    f"{os.getenv('HOST')}/v1/xtwitter/callback"
 )
 
 router = APIRouter(prefix="/v1/xtwitter")

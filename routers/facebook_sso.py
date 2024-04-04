@@ -19,8 +19,7 @@ FACEBOOK_CLIENT_SECRET = os.getenv("FACEBOOK_CLIENT_SECRET")
 facebook_sso = FacebookSSO(
     FACEBOOK_CLIENT_ID,
     FACEBOOK_CLIENT_SECRET,
-    f"{os.getenv('HOST')}/v1/facebook/callback",
-    allow_insecure_http=True
+    f"{os.getenv('HOST')}/v1/facebook/callback"
 )
 
 router = APIRouter(prefix="/v1/facebook")
