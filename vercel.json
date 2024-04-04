@@ -13,8 +13,5 @@
             "src": "/(.*)",
             "dest": "main.py"
         }
-    ],
-    "env": {
-        "PYTHON_VERSION": "3.11"
-      }
+    ]
 }
