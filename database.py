@@ -5,10 +5,9 @@ import os
 
 load_dotenv()
 
-
 if os.environ.get('VERCEL'):
     DATABASE_URL = os.environ.get('DATABASE_URL')
-    connect_args = None
+    connect_args = {}
 else:
     DATABASE_URL = "sqlite:///./local_storage.db"
     connect_args = {"check_same_thread": False}
