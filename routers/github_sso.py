@@ -15,12 +15,11 @@ load_dotenv()
 GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID")
 GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 github_sso = GithubSSO(
     GITHUB_CLIENT_ID,
-    GITHUB_CLIENT_SECRET, 
-    "http://localhost:9999/v1/github/callback",
+    GITHUB_CLIENT_SECRET,
+    f"{os.getenv('HOST')}/v1/github/callback",
     allow_insecure_http=True
 )
 

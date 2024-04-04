@@ -15,12 +15,11 @@ load_dotenv()
 GITLAB_CLIENT_ID = os.getenv("GITLAB_CLIENT_ID")
 GITLAB_CLIENT_SECRET = os.getenv("GITLAB_CLIENT_SECRET")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 gitlab_sso = GitlabSSO(
     GITLAB_CLIENT_ID,
     GITLAB_CLIENT_SECRET,
-    "http://localhost:9999/v1/gitlab/callback",
+    f"{os.getenv('HOST')}/v1/gitlab/callback",
     allow_insecure_http=True
 )
 

@@ -19,8 +19,8 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 google_sso = GoogleSSO(
     GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET, 
-    "http://localhost:9999/v1/google/callback",
+    GOOGLE_CLIENT_SECRET,
+    f"{os.getenv('HOST')}/v1/google/callback",
     allow_insecure_http=True
 )
 

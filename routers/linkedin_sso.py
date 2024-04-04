@@ -15,12 +15,11 @@ load_dotenv()
 LINKEDIN_CLIENT_ID = os.getenv("LINKEDIN_CLIENT_ID")
 LINKEDIN_CLIENT_SECRET = os.getenv("LINKEDIN_CLIENT_SECRET")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 linkedin_sso = LinkedInSSO(
     LINKEDIN_CLIENT_ID,
     LINKEDIN_CLIENT_SECRET,
-    "http://localhost:9999/v1/linkedin/callback",
+    f"{os.getenv('HOST')}/v1/linkedin/callback",
     allow_insecure_http=True
 )
 

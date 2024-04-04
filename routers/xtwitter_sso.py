@@ -15,12 +15,11 @@ load_dotenv()
 XTWITTER_CLIENT_ID = os.getenv("XTWITTER_CLIENT_ID")
 XTWITTER_CLIENT_SECRET = os.getenv("XTWITTER_CLIENT_SECRET")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 xtwitter_sso = TwitterSSO(
     XTWITTER_CLIENT_ID,
     XTWITTER_CLIENT_SECRET,
-    "http://localhost:9999/v1/xtwitter/callback",
+    f"{os.getenv('HOST')}/v1/xtwitter/callback",
     allow_insecure_http=True
 )
 

@@ -16,12 +16,11 @@ MICROSOFT_CLIENT_ID = os.getenv("MICROSOFT_CLIENT_ID")
 MICROSOFT_CLIENT_SECRET = os.getenv("MICROSOFT_CLIENT_SECRET")
 TENANT = os.getenv("TENANT")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 microsoft_sso = MicrosoftSSO(
     MICROSOFT_CLIENT_ID,
     MICROSOFT_CLIENT_SECRET,
-    "http://localhost:9999/v1/microsoft/callback",
+    f"{os.getenv('HOST')}/v1/microsoft/callback",
     allow_insecure_http=True,
     tenant=TENANT
 )

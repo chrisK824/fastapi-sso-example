@@ -15,12 +15,11 @@ load_dotenv()
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 spotify_sso = SpotifySSO(
     SPOTIFY_CLIENT_ID,
-    SPOTIFY_CLIENT_SECRET, 
-    "http://localhost:9999/v1/spotify/callback",
+    SPOTIFY_CLIENT_SECRET,
+    f"{os.getenv('HOST')}/v1/spotify/callback",
     allow_insecure_http=True
 )
 

@@ -9,7 +9,7 @@ if os.environ.get('VERCEL'):
     DATABASE_URL = os.environ.get('DATABASE_URL')
     connect_args = {}
 else:
-    DATABASE_URL = "sqlite:///./local_storage.db"
+    DATABASE_URL = os.environ.get('DATABASE_URL')
     connect_args = {"check_same_thread": False}
 
 engine = create_engine(DATABASE_URL, connect_args=connect_args)

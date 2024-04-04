@@ -15,12 +15,11 @@ load_dotenv()
 FACEBOOK_CLIENT_ID = os.getenv("FACEBOOK_CLIENT_ID")
 FACEBOOK_CLIENT_SECRET = os.getenv("FACEBOOK_CLIENT_SECRET")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 facebook_sso = FacebookSSO(
     FACEBOOK_CLIENT_ID,
-    FACEBOOK_CLIENT_SECRET, 
-    "http://localhost:9999/v1/facebook/callback",
+    FACEBOOK_CLIENT_SECRET,
+    f"{os.getenv('HOST')}/v1/facebook/callback",
     allow_insecure_http=True
 )
 
