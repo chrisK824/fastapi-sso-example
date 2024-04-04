@@ -14,15 +14,13 @@ import os
 load_dotenv()
 MICROSOFT_CLIENT_ID = os.getenv("MICROSOFT_CLIENT_ID")
 MICROSOFT_CLIENT_SECRET = os.getenv("MICROSOFT_CLIENT_SECRET")
-TENANT = os.getenv("TENANT")
 
 
 microsoft_sso = MicrosoftSSO(
     MICROSOFT_CLIENT_ID,
     MICROSOFT_CLIENT_SECRET,
     f"{os.getenv('HOST')}/v1/microsoft/callback",
-    allow_insecure_http=True,
-    tenant=TENANT
+    allow_insecure_http=True
 )
 
 router = APIRouter(prefix="/v1/microsoft")
