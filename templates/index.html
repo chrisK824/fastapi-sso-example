@@ -37,8 +37,20 @@
     </table>
     </div>
     <div class="version-container">
-        <span class="version">fastapi: v{{fastapi_version}}</span>
-        <span class="version">fastapi-sso: v{{fastapi_sso_version}}</span>
+        <table class="version-table">
+            <tr>
+                <th>Package</th>
+                <th>Version</th>
+            </tr>
+            <tr>
+                <td>fastapi:</td>
+                <td>{{fastapi_version}}</td>
+            </tr>
+            <tr>
+                <td>fastapi_sso:</td>
+                <td>{{fastapi_sso_version}}</td>
+            </tr>
+        </table>
     </div>
 </body>
 
