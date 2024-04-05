@@ -27,6 +27,11 @@ button {
   vertical-align: bottom;
 }
 
+button[disabled] {
+  background-color: #ccc; /* Change background color for disabled state */
+  cursor: not-allowed; /* Change cursor for disabled state */
+}
+
 button:hover {
   opacity: 0.8;
 }
@@ -51,4 +56,25 @@ button:hover {
   float: right;
   margin-top: 1%;
   margin-bottom: 1%;
+}
+
+.version-container {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.version-table {
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #888;
+}
+
+.version-table th {
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.version-table td {
+  padding: 5px 10px;
 }

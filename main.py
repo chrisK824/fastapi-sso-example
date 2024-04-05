@@ -1,4 +1,5 @@
 import uvicorn
+from importlib.metadata import version
 from fastapi import FastAPI, Request, Depends, HTTPException
 from contextlib import asynccontextmanager
 from db_models import Base
@@ -75,12 +76,16 @@ def home_page(request: Request, db: Session = Depends(get_db), user: User = Depe
     """
     Returns all users.
     """
+    versions = {
+        "fastapi_version": version('fastapi'),
+        "fastapi_sso_version": version('fastapi_sso')
+    }
     try:
         if user is not None:
             users_stats = db_crud.get_users_stats(db)
-            response = templates.TemplateResponse("index.html", {"request": request, "user": user, "users_stats": users_stats})
+            response = templates.TemplateResponse("index.html", {"request": request, "user": user, "users_stats": users_stats, **versions})
         else:
-            response = templates.TemplateResponse("login.html", {"request": request})
+            response = templates.TemplateResponse("login.html", {"request": request, **versions})
         return response
     except Exception as e:
         raise HTTPException(
