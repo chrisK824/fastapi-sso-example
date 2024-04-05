@@ -1,6 +1,9 @@
 # fastapi-sso-example
 FastAPI Single Sign On example with various providers and minimal home page that presents counters for users from each provider 
 
+## Cloud deployed demo
+https://fastapi-sso-example.vercel.app/
+
 ## Installation
 
 * Create a python virtual environment: `python3.11 -m venv venv`
