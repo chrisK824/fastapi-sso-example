@@ -1,5 +1,7 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Geneva', Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: large;
 }
 
 form {
@@ -77,4 +79,41 @@ button:hover {
 
 .version-table td {
   padding: 5px 10px;
+}
+
+form {
+  border: none;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup_or_sso {
+  position: relative;
+  text-align: center;
+}
+
+.signup-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #27a9e1;
+  text-decoration: none;
+  align-content: center;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+#continue_with_sso {
+  padding: 10px 0px 5px 0px;
 }

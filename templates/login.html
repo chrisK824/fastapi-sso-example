@@ -8,40 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link id="favicon" rel="icon" type="image/x-icon" href="static/images/favicon.png">
-
-    <style>
-        /* Remove border from the login form */
-        form {
-            border: none;
-        }
-
-        /* Adjust the width of the login form */
-        .login-form {
-            width: 100%;
-        }
-
-        /* Center content vertically */
-        .container {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Geneva';
-            font-size:large
-        }
-
-        .signup-link {
-            display: inline-block;
-            margin-top: 10px; /* Adjust this margin according to your design */
-            color: #27a9e1; /*Change color as needed */
-            text-decoration: none;
-            align-content: center;
-        }
-
-        .signup-link:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 
 <body>
@@ -58,35 +24,35 @@
                     <button type="submit">Login</button>
                 </form>
                 
-                <div style="position: relative; text-align: center;">
-                    Don't have an account? <a href="/v1/documentation#/Auth/create_user_v1_sign_up_post" target="_blank" class="signup-link">Sign up</a>
-                    <p  style="padding: 10px 0px 5px 0px;">Or continue with:</p>
+                <div class="signup_or_sso">
+                    <p>Don't have an account? <a href="/v1/documentation#/Auth/create_user_v1_sign_up_post" target="_blank" class="signup-link">Sign up</a></p>
+                    <p  id="continue_with_sso">Or continue with:</p>
                 </div>
                 <div class="row mt-3">
-                    <form class="col-lg-3" method="get" action="/v1/google/login" style="text-align: center;">
+                    <form class="col-lg-3" method="get" action="/v1/google/login" >
                         <button class="login-btn" type="submit"><i class="fa-brands fa-google"></i></button>
                     </form>
-                    <form class="col-lg-3" method="get" action="/v1/microsoft/login" style="text-align: center;">
+                    <form class="col-lg-3" method="get" action="/v1/microsoft/login" >
                         <button class="login-btn" type="submit"><i class="fa-brands fa-microsoft"></i></button>
                     </form>
-                    <form class="col-lg-3" method="get" action="/v1/github/login" style="text-align: center;">
+                    <form class="col-lg-3" method="get" action="/v1/github/login" >
                         <button class="login-btn" type="submit"><i class="fa-brands fa-github"></i></button>
                     </form>
-                    <form class="col-lg-3" method="get" action="/v1/gitlab/login" style="text-align: center;">
+                    <form class="col-lg-3" method="get" action="/v1/gitlab/login" >
                         <button class="login-btn" type="submit"><i class="fa-brands fa-gitlab"></i></button>
                     </form>
                 </div>
                 <div class="row mt-3">
-                    <form class="col-lg-3" method="get" action="/v1/spotify/login" style="text-align: center;">
+                    <form class="col-lg-3" method="get" action="/v1/spotify/login" >
                         <button class="login-btn" type="submit"><i class="fa-brands fa-spotify"></i></button>
                     </form>
-                    <form class="col-lg-3" method="get" action="/v1/facebook/login" style="text-align: center;">
+                    <form class="col-lg-3" method="get" action="/v1/facebook/login" >
                         <button class="login-btn" disabled title="Currently unavailable" type="submit"><i class="fa-brands fa-facebook"></i></button>
                     </form>
-                    <form class="col-lg-3" method="get" action="/v1/xtwitter/login" style="text-align: center;">
+                    <form class="col-lg-3" method="get" action="/v1/xtwitter/login" >
                         <button class="login-btn" type="submit"><i class="fa-brands fa-x"></i></button>
                     </form>
-                    <form class="col-lg-3" method="get" action="/v1/linkedin/login" style="text-align: center;">
+                    <form class="col-lg-3" method="get" action="/v1/linkedin/login" >
                         <button class="login-btn" type="submit"><i class="fa-brands fa-linkedin"></i></button>
                     </form>
                 </div>
