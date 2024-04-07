@@ -3,6 +3,7 @@
 
 <head>
     <title>Home page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -11,46 +12,53 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="outter">
-        <form class="col-lg-2 logout" method="post" action="/v1/logout">
-            <button class="fa-solid fa-right-from-bracket" type="submit">
-            </button>
-        </form>
-        <p class="col-lg-2"><i class="fa-regular fa-user"></i> {{user.username}}</p>
-        
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Provider</th>
-                <th scope="col">Users #</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for record in users_stats %}
-            <tr>
-                <td>{{record.provider}}</td>
-                <td>{{record.count}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    </div>
-    <div class="version-container">
-        <table class="version-table">
-            <tr>
-                <th>Package</th>
-                <th>Version</th>
-            </tr>
-            <tr>
-                <td>fastapi:</td>
-                <td>{{fastapi_version}}</td>
-            </tr>
-            <tr>
-                <td>fastapi_sso:</td>
-                <td>{{fastapi_sso_version}}</td>
-            </tr>
-        </table>
+    <div class="container">
+        <div class="header">
+            <p class="username"><i class="fa-regular fa-user"></i> {{user.username}}</p>
+            <form class="logout" method="post" action="/v1/logout">
+                <button class="logout-btn fa-solid fa-right-from-bracket" type="submit"></button>
+            </form>
+        </div>
+
+        <div class="users-table">
+            <table class="table table-striped table-hover">
+                <!-- Table content -->
+                <thead>
+                    <tr>
+                        <th scope="col">Provider</th>
+                        <th scope="col">Users #</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in users_stats %}
+                    <tr>
+                        <td>{{record.provider}}</td>
+                        <td>{{record.count}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <div class="version-container">
+                <table class="version-table">
+                    <!-- Version table content -->
+                    <tr>
+                        <th>Package</th>
+                        <th>Version</th>
+                    </tr>
+                    <tr>
+                        <td>fastapi:</td>
+                        <td>{{fastapi_version}}</td>
+                    </tr>
+                    <tr>
+                        <td>fastapi_sso:</td>
+                        <td>{{fastapi_sso_version}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 

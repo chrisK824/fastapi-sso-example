@@ -3,6 +3,7 @@
 
 <head>
     <title>Login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -11,7 +12,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="login-container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <form action="v1/login" method="post" class="login-form">
@@ -59,21 +60,24 @@
             </div>
         </div>
     </div>
-    <div class="version-container">
-        <table class="version-table">
-            <tr>
-                <th>Package</th>
-                <th>Version</th>
-            </tr>
-            <tr>
-                <td>fastapi:</td>
-                <td>{{fastapi_version}}</td>
-            </tr>
-            <tr>
-                <td>fastapi_sso:</td>
-                <td>{{fastapi_sso_version}}</td>
-            </tr>
-        </table>
+    <div class="footer">
+        <div class="version-container">
+            <table class="version-table">
+                <!-- Version table content -->
+                <tr>
+                    <th>Package</th>
+                    <th>Version</th>
+                </tr>
+                <tr>
+                    <td>fastapi:</td>
+                    <td>{{fastapi_version}}</td>
+                </tr>
+                <tr>
+                    <td>fastapi_sso:</td>
+                    <td>{{fastapi_sso_version}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 

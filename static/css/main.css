@@ -4,12 +4,6 @@ body {
   font-size: large;
 }
 
-form {
-  width: 60%;
-  margin: 0 auto;
-}
-
-
 input[type=text],
 input[type=password] {
   width: 100%;
@@ -30,66 +24,19 @@ button {
 }
 
 button[disabled] {
-  background-color: #ccc; /* Change background color for disabled state */
-  cursor: not-allowed; /* Change cursor for disabled state */
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 button:hover {
   opacity: 0.8;
 }
 
-.outter {
-  padding: 16px;
-  width: 50%;
-  margin-left: 25%
-}
-
-.sso {
-  display: flex;
-  margin-top: 2%;
-  margin: 2% auto;
-}
-
 .login-btn {
   border-radius: 3px;
 }
 
-.logout {
-  float: right;
-  margin-top: 1%;
-  margin-bottom: 1%;
-}
-
-.version-container {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
-
-.version-table {
-  border-collapse: collapse;
-  font-size: 14px;
-  color: #888;
-}
-
-.version-table th {
-  text-align: left;
-  padding: 5px 10px;
-}
-
-.version-table td {
-  padding: 5px 10px;
-}
-
-form {
-  border: none;
-}
-
-.login-form {
-  width: 100%;
-}
-
-.container {
+.login-container {
   height: 100vh;
   display: flex;
   vertical-align: middle;
@@ -116,4 +63,82 @@ form {
 
 #continue_with_sso {
   padding: 10px 0px 5px 0px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin: 0;
+}
+
+.users-table {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 10px;
+}
+
+.footer {
+  text-align: right;
+  margin-top: auto;
+}
+
+.version-container {
+  display: inline-block;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.version-table th {
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.version-table td {
+  padding: 5px 10px;
+}
+
+@media only screen and (max-width: 990px) {
+  .footer{
+    text-align: center;
+  }
+
+  .version-container {
+      position: static;
+      margin-bottom: 20px;
+  }
+
+  .login-container {
+    display: block;
+    align-items: center;
+    margin: 10%;
+  }
+
+  .row.mt-3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .row.mt-3 form {
+    flex: 0 0 calc(50% - 20px);
+    margin: 10px;
+  }
 }
