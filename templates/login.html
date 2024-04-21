@@ -60,7 +60,11 @@
             </div>
         </div>
     </div>
+
     <div class="footer">
+        <div>
+            <a href="#" onclick="openPrivacyPolicy()">Privacy Policy & Disclaimer</a>
+        </div>
         <div class="version-container">
             <table class="version-table">
                 <!-- Version table content -->
@@ -81,4 +85,21 @@
     </div>
 </body>
 
+    <script>
+        // Function to open the privacy policy content in a popup window
+        function openPrivacyPolicy() {
+            // Fetch the privacy policy content from the backend (replace with your actual API endpoint)
+            fetch('/privacy_policy')
+                .then(response => response.text())
+                .then(data => {
+                    // Create a popup window with the privacy policy content
+                    const popupWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes');
+                    popupWindow.document.write(data);
+                    popupWindow.document.close();
+                })
+                .catch(error => {
+                    console.error('Error fetching privacy policy:', error);
+                });
+        }
+    </script>
 </html>

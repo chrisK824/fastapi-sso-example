@@ -37,7 +37,7 @@ button:hover {
 }
 
 .login-container {
-  height: 100vh;
+  height: 80vh;
   display: flex;
   vertical-align: middle;
   justify-content: center;
@@ -95,7 +95,7 @@ button:hover {
 }
 
 .footer {
-  text-align: right;
+  text-align: center;
   margin-top: auto;
 }
 
@@ -116,10 +116,6 @@ button:hover {
 }
 
 @media only screen and (max-width: 990px) {
-  .footer{
-    text-align: center;
-  }
-
   .version-container {
       position: static;
       margin-bottom: 20px;

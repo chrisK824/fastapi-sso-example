@@ -26,7 +26,11 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from database import get_db
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
 parent_directory = Path(__file__).parent
 templates_path = parent_directory / "templates"
 templates = Jinja2Templates(directory=templates_path)
@@ -86,6 +90,26 @@ def home_page(request: Request, db: Session = Depends(get_db), user: User = Depe
             response = templates.TemplateResponse("index.html", {"request": request, "user": user, "users_stats": users_stats, **versions})
         else:
             response = templates.TemplateResponse("login.html", {"request": request, **versions})
+        return response
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"An unexpected error occurred. Report this message to support: {e}")
+
+
+@app.get("/privacy_policy", response_class=HTMLResponse, summary="Privacy Policy")
+def privacy_policy(request: Request):
+    """
+    Returns privacy policy page.
+    """
+    try:
+        response = templates.TemplateResponse(
+            "privacy_policy.html",
+            {
+                "request": request,
+                "host": os.getenv('HOST'),
+                "contact_email": os.getenv('CONTACT_EMAIL')
+            }
+        )
         return response
     except Exception as e:
         raise HTTPException(
