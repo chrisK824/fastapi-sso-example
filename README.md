@@ -17,6 +17,8 @@ https://fastapi-sso-example.vercel.app/
 * For creating client IDs and secrets for each provider you can follow these guides:
 - Google: https://medium.com/itnext/fastapi-google-single-sign-on-sso-47454e2e2859
 - Facebook: https://medium.com/@christos.karvouniaris247/fastapi-facebook-single-sign-on-sso-b10865535029
+- X (Twitter): https://itnext.io/fastapi-x-twitter-single-sign-on-sso-5725671ad180
+- LinkedIn: https://itnext.io/fastapi-linkedin-single-sign-on-sso-b1a0118b02d7
 - GitHub: https://medium.com/@christos.karvouniaris247/fastapi-github-single-sign-on-sso-f6b942395649
 - Microsoft: https://medium.com/@christos.karvouniaris247/fastapi-microsoft-single-sign-on-sso-d0a0ab248c36
 - Spotify: https://medium.com/@christos.karvouniaris247/fastapi-spotify-single-sign-on-sso-4f461b95344c
