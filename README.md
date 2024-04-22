@@ -20,6 +20,7 @@ https://fastapi-sso-example.vercel.app/
 - X (Twitter): https://itnext.io/fastapi-x-twitter-single-sign-on-sso-5725671ad180
 - LinkedIn: https://itnext.io/fastapi-linkedin-single-sign-on-sso-b1a0118b02d7
 - GitHub: https://medium.com/@christos.karvouniaris247/fastapi-github-single-sign-on-sso-f6b942395649
+- GitLab: https://levelup.gitconnected.com/fastapi-gitlab-single-sign-on-sso-624fe442ec56
 - Microsoft: https://medium.com/@christos.karvouniaris247/fastapi-microsoft-single-sign-on-sso-d0a0ab248c36
 - Spotify: https://medium.com/@christos.karvouniaris247/fastapi-spotify-single-sign-on-sso-4f461b95344c
 
