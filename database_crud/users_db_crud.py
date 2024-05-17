@@ -3,7 +3,7 @@ from db_models import User
 import schemas as schemas
 from sqlalchemy.exc import IntegrityError
 from authentication import get_password_hash
-from sqlalchemy import func
+from sqlalchemy import func, desc
 
 
 class DuplicateError(Exception):
@@ -49,7 +49,7 @@ def get_users_stats(db: Session):
     records = db.query(User).with_entities(
         User.provider.label("provider"),
         func.count(User.provider).label("count")
-    ).group_by(User.provider).all()
+    ).group_by(User.provider).order_by(desc("count")).all()
 
     users_stats = [
         schemas.UserStat(
