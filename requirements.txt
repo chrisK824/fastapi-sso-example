@@ -1,5 +1,5 @@
 fastapi==0.115.0
-pydantic==2.9.1
+pydantic==2.9.2
 uvicorn==0.30.6
 sqlalchemy==2.0.35
 passlib==1.7.4
