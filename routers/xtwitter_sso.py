@@ -27,7 +27,7 @@ router = APIRouter(prefix="/v1/xtwitter")
 
 @router.get("/login", tags=['X(Twitter) SSO'])
 async def xtwitter_login():
-    with xtwitter_sso:
+    async with xtwitter_sso:
         return await xtwitter_sso.get_login_redirect()
 
 
@@ -36,7 +36,7 @@ async def xtwitter_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from X(Twitter) and return user info"""
 
     try:
-        with xtwitter_sso:
+        async with xtwitter_sso:
             user = await xtwitter_sso.verify_and_process(request)
         username = user.email if user.email else user.display_name
         user_stored = db_crud.get_user(db, username, user.provider)

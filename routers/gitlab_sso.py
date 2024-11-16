@@ -27,7 +27,7 @@ router = APIRouter(prefix="/v1/gitlab")
 
 @router.get("/login", tags=['GitLab SSO'])
 async def gitlab_login():
-    with gitlab_sso:
+    async with gitlab_sso:
         return await gitlab_sso.get_login_redirect()
 
 
@@ -36,7 +36,7 @@ async def gitlab_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from GitLab and return user info"""
 
     try:
-        with gitlab_sso:
+        async with gitlab_sso:
             user = await gitlab_sso.verify_and_process(request)
         username = user.email if user.email else user.display_name
         user_stored = db_crud.get_user(db, username, user.provider)

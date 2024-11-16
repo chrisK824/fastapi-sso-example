@@ -27,7 +27,7 @@ router = APIRouter(prefix="/v1/linkedin")
 
 @router.get("/login", tags=['LinkedIn SSO'])
 async def linkedin_login():
-    with linkedin_sso:
+    async with linkedin_sso:
         return await linkedin_sso.get_login_redirect()
 
 
@@ -36,7 +36,7 @@ async def linkedin_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from LinkedIn and return user info"""
 
     try:
-        with linkedin_sso:
+        async with linkedin_sso:
             user = await linkedin_sso.verify_and_process(request)
         username = user.email if user.email else user.display_name
         user_stored = db_crud.get_user(db, username, user.provider)

@@ -27,7 +27,7 @@ router = APIRouter(prefix="/v1/spotify")
 
 @router.get("/login", tags=['Spotify SSO'])
 async def spotify_login():
-    with spotify_sso:
+    async with spotify_sso:
         return await spotify_sso.get_login_redirect()
 
 
@@ -36,7 +36,7 @@ async def spotify_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from Spotify and return user info"""
 
     try:
-        with spotify_sso:
+        async with spotify_sso:
             user = await spotify_sso.verify_and_process(request)
         user_stored = db_crud.get_user(db, user.email, user.provider)
         if not user_stored:

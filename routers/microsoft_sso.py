@@ -27,7 +27,7 @@ router = APIRouter(prefix="/v1/microsoft")
 
 @router.get("/login", tags=['Microsoft SSO'])
 async def microsoft_login():
-    with microsoft_sso:
+    async with microsoft_sso:
         return await microsoft_sso.get_login_redirect()
 
 
@@ -36,7 +36,7 @@ async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
     """Process login response from Microsoft and return user info"""
 
     try:
-        with microsoft_sso:
+        async with microsoft_sso:
             user = await microsoft_sso.verify_and_process(request)
         user_stored = db_crud.get_user(db, user.email, user.provider)
         if not user_stored:
