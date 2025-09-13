@@ -4,7 +4,7 @@ uvicorn==0.35.0
 sqlalchemy==2.0.43
 passlib==1.7.4
 python-jose==3.5.0
-email-validator==2.2.0
+email-validator==2.3.0
 bcrypt==4.3.0
 python-multipart==0.0.20
 jinja2==3.1.6
