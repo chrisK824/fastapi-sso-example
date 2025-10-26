@@ -1,17 +1,17 @@
 {
-    "version": 2,
     "public": false,
+    "buildCommand": null,
+    "framework": null,
     "devCommand": "uvicorn main:app --host 0.0.0.0 --port 80",
-    "builds": [
-        {
-            "src": "main.py",
-            "use": "@vercel/python"
+    "functions": {
+        "api/*.py": {
+          "runtime": "vercel-python@latest"
         }
-    ],
-    "routes": [
+    },
+    "rewrites": [
         {
             "src": "/(.*)",
-            "dest": "main.py"
+            "destination": "main.py"
         }
     ]
 }
