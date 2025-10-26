@@ -4,14 +4,14 @@
     "framework": null,
     "devCommand": "uvicorn main:app --host 0.0.0.0 --port 80",
     "functions": {
-        "./main.py": {
+        "api/entrypoint.py": {
           "runtime": "@vercel/python@5.0.10"
         }
     },
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "./main.py"
+            "destination": "/api/entrypoint.py"
         }
     ]
 }
