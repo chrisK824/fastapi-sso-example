@@ -4,7 +4,7 @@
     "framework": null,
     "devCommand": "uvicorn main:app --host 0.0.0.0 --port 80",
     "functions": {
-        "api/*.py": {
+        "main.py": {
           "runtime": "vercel-python@latest"
         }
     },
