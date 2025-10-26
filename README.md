@@ -6,9 +6,9 @@ https://fastapi-sso-example.vercel.app/
 
 ## Installation
 
-* Create a python virtual environment: `python3.11 -m venv venv`
+* Create a python virtual environment: `python3.12 -m venv venv`
 * Activate the virtual environment: `source venv/bin/activate`
-* Install dependencies: `python3.11 -m pip install -r requirements.txt`
+* Install dependencies: `python3.12 -m pip install -r requirements.txt`
 
 ## Setup and Configuration
 
@@ -25,7 +25,7 @@ https://fastapi-sso-example.vercel.app/
 - Spotify: https://medium.com/@christos.karvouniaris247/fastapi-spotify-single-sign-on-sso-4f461b95344c
 
 ## Use the project
-* While in activated virtual environment, run with: `python3.11 main.py`
+* While in activated virtual environment, run with: `python3.12 main.py`
 
 ## To sign up a local user
 Use the swagger documentation at `localhost:9999/v1/documentation`, example:
