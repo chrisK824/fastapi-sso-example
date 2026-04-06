@@ -84,12 +84,13 @@ def home_page(request: Request, db: Session = Depends(get_db), user: User = Depe
         "fastapi_version": version('fastapi'),
         "fastapi_sso_version": version('fastapi_sso')
     }
+
     try:
         if user is not None:
             users_stats = db_crud.get_users_stats(db)
-            response = templates.TemplateResponse("index.html", {"request": request, "user": user, "users_stats": users_stats, **versions})
+            response = templates.TemplateResponse(request=request, name="index.html", context={"user": user, "users_stats": users_stats, **versions})
         else:
-            response = templates.TemplateResponse("login.html", {"request": request, **versions})
+            response = templates.TemplateResponse(request=request, name="login.html", context={**versions})
         return response
     except Exception as e:
         raise HTTPException(
@@ -103,12 +104,9 @@ def privacy_policy(request: Request):
     """
     try:
         response = templates.TemplateResponse(
-            "privacy_policy.html",
-            {
-                "request": request,
-                "host": os.getenv('HOST'),
-                "contact_email": os.getenv('CONTACT_EMAIL')
-            }
+            request=request,
+            name="privacy_policy.html",
+            context={"host": os.getenv('HOST'), "contact_email": os.getenv('CONTACT_EMAIL')}
         )
         return response
     except Exception as e:
