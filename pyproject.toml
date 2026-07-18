@@ -4,7 +4,7 @@ version = "0.1.0"
 requires-python = "==3.12.*"
 
 dependencies = [
-    "fastapi==0.138.1",
+    "fastapi==0.139.2",
     "pydantic==2.13.4",
     "uvicorn==0.51.0",
     "sqlalchemy==2.0.51",
