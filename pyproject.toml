@@ -5,7 +5,7 @@ requires-python = "==3.12.*"
 
 dependencies = [
     "fastapi==0.141.1",
-    "pydantic==2.13.4",
+    "pydantic==2.13.5",
     "uvicorn==0.52.4",
     "sqlalchemy==2.0.52",
     "passlib==1.7.4",
